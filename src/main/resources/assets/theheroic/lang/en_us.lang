@@ -1,0 +1,20 @@
+//items
+item.essence.name=Base Essence
+
+//weapons
+item.flash_blade.name=Flashy Blade
+item.repeating_blade.name=Unnatural Barrage
+item.death_mark.name=Death's Mark
+item.staff_of_end.name=Staff Of The End
+item.hermes_blade.name=Sword of Hermes
+item.bulwarks_hallmark.name=Bulwark's Hallmark
+
+//tabs
+itemGroup.heroicmisctab=The Heroic (Miscellaneous)
+itemGroup.heroicweaponstab=The Heroic (Weapons)
+
+//potioneffects
+effect.mark_of_death=Mark of Death
+potion.effect.mark_of_death=Potion of Mark Of Death
+effect.soul_removal=Soul Removed
+potion.effect.soul_removal=Potion of Soul Removal
