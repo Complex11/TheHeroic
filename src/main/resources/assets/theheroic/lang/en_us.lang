@@ -1,20 +1,44 @@
 //items
 item.essence.name=Base Essence
+item.reality_fragment.name=Reality Fragment
 
 //weapons
+
+//C-Class
+item.nature_slayer.name=Garden Special
+item.glassy_edge.name=Glassy Edge
+
+//B-Class
+item.flamewaker.name=Flamewaker
+
+//A-Class
 item.flash_blade.name=Flashy Blade
 item.repeating_blade.name=Unnatural Barrage
 item.death_mark.name=Death's Mark
 item.staff_of_end.name=Staff Of The End
 item.hermes_blade.name=Sword of Hermes
 item.bulwarks_hallmark.name=Bulwark's Hallmark
+item.hellfire_blaze.name=Hellfire Blaze
+
+//S-Class
+item.reality_blade.name=What Is Real?
+
 
 //tabs
-itemGroup.heroicmisctab=The Heroic (Miscellaneous)
-itemGroup.heroicweaponstab=The Heroic (Weapons)
+itemGroup.heroicmisctab=The Heroic Miscellaneous
+itemGroup.heroicweaponstabcclass=The Heroic C-Class Weapons
+itemGroup.heroicweaponstabbclass=The Heroic B-Class Weapons
+itemGroup.heroicweaponstabaclass=The Heroic A-Class Weapons
+itemGroup.heroicweaponstabsclass=The Heroic S-Class Weapons
 
 //potioneffects
-effect.mark_of_death=Mark of Death
-potion.effect.mark_of_death=Potion of Mark Of Death
-effect.soul_removal=Soul Removed
-potion.effect.soul_removal=Potion of Soul Removal
+effect.theheroic:mark_of_death=Mark of Death
+potion.theheroic:mark_of_death=Mark Of Death
+effect.theheroic:soul_removal=Soul Removed
+potion.theheroic:soul_removal=Soul Removed
+effect.theheroic:time_stopped=Time Stopped
+potion.theheroic:time_stopped=Time Stopped
+effect.theheroic:4_D=Outer Dimensional
+potion.theheroic:4_D=Outer Dimensional
+effect.theheroic:bleed=Bleeding
+potion.theheroic:bleed=Bleeding
