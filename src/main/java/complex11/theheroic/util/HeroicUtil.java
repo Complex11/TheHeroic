@@ -31,10 +31,33 @@ public class HeroicUtil {
 	
 	public static DamageSource heartPierce = new DamageSource("heartpierce").setDamageBypassesArmor().setDamageIsAbsolute();
 	
+	//UTILITY
+	
 	public static void SendMsgToPlayer(String msg, EntityPlayer player) {
 		ITextComponent msgToSend = new TextComponentString(msg);
 		player.sendMessage(msgToSend);
 	}
+	
+
+	public static void damageAndCheckItem(ItemStack item, int damage) {
+		item.setItemDamage(item.getItemDamage() + damage);
+	    if (item.getItemDamage() > item.getMaxDamage()) {
+	    	item.shrink(1);
+	    }
+	}
+	
+	public static void flyTo(Vec3d to, Entity me, double speed) {
+		to = to.subtract(me.posX, me.posY, me.posZ);
+		to = to.scale(speed / to.lengthVector());
+		me.addVelocity(to.x, to.y, to.z);
+	}
+	
+	
+	public static boolean checkGameRule(World world, String gameRule) {
+		return world.getGameRules().getBoolean(gameRule);
+	}
+	
+	//ATTACKS
 	
 	public static void ScalingAttack(float damage, DamageSource source, EntityLivingBase target) {
 		if (Float.isInfinite(damage) || Float.isNaN(damage)) {
@@ -114,18 +137,16 @@ public class HeroicUtil {
 			attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 1, true, false));
 		}
 	}
-
-	public static void damageAndCheckItem(ItemStack item) {
-		item.setItemDamage(item.getItemDamage() + 1);
-	    if (item.getItemDamage() > item.getMaxDamage()) {
-	    	item.shrink(1);
-	    }
-	}
 	
-	public static void flyTo(Vec3d to, Entity me, double speed) {
-		to = to.subtract(me.posX, me.posY, me.posZ);
-		to = to.scale(speed / to.lengthVector());
-		me.addVelocity(to.x, to.y, to.z);
+	//PARTICLES
+	
+	public static void spawnParticleCircleAroundEntity(EntityLivingBase entity, EnumParticleTypes particle, float radius) {
+		for (float a = 0; a < 36; a += 0.1f) {
+			Vec3d at = new Vec3d(radius, 0, 0);
+			at = at.rotateYaw(a / radius);
+			at = at.addVector(entity.posX, entity.posY, entity.posZ);
+			entity.world.spawnParticle(particle, at.x, at.y, at.z, 0, 0, 0);
+		}
 	}
 	
 	public static void spawnParticleAtEntity(EntityLivingBase entity, EnumParticleTypes particle, int number) {
@@ -160,6 +181,8 @@ public class HeroicUtil {
 	        world.spawnParticle(particle, d3, d4, d5, (double)f, (double)f1, (double)f2);
 		}
 	}
+	
+	//WORLD
 	
 	public static boolean SpecialTeleport(double x, double y, double z, EntityLivingBase entity) {
 		entity.posX = x;
@@ -278,10 +301,6 @@ public class HeroicUtil {
 
 	public static Explosion createExplosion(@Nullable Entity exploder, World world, double posX, double posY, double posZ, float strength, boolean destructiveExplosion, boolean fieryExplosion) {
 		return world.newExplosion(exploder, posX, posY, posZ, strength, fieryExplosion, destructiveExplosion);
-	}
-	
-	public static boolean checkGameRule(World world, String gameRule) {
-		return world.getGameRules().getBoolean(gameRule);
 	}
 }
 

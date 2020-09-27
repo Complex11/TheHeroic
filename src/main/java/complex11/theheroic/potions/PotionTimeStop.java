@@ -3,24 +3,15 @@ package complex11.theheroic.potions;
 import java.util.ArrayList;
 import java.util.List;
 
-import complex11.theheroic.Main;
 import complex11.theheroic.init.ModPotions;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import complex11.theheroic.util.interfaces.ISyncedPotion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.living.PotionEvent.PotionAddedEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-@EventBusSubscriber
 public class PotionTimeStop extends PotionBase implements ISyncedPotion {
 
 	public static final String NBT_KEY = "time_stopped";
@@ -40,7 +31,7 @@ public class PotionTimeStop extends PotionBase implements ISyncedPotion {
 		targetsBeyondRange.forEach(e -> e.updateBlocked = false);
 	}
 
-	private static void performEffectConsistent(EntityLivingBase host, int strength) {
+	public static void performEffectConsistent(EntityLivingBase host, int strength) {
 		List<Entity> targetsInRange = HeroicUtil.getEntitiesWithinRadius(getEffectRadius(), host.posX, host.posY, host.posZ, host.world, Entity.class);
 		targetsInRange.remove(host);
 		for (Entity entity : targetsInRange) {
@@ -62,36 +53,6 @@ public class PotionTimeStop extends PotionBase implements ISyncedPotion {
 					entity.updateBlocked = false;
 				}
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void onLivingUpdateEvent(LivingUpdateEvent event) {
-		EntityLivingBase entity = event.getEntityLiving();
-		if (entity.isPotionActive(ModPotions.TIME_STOP_EFFECT)) {
-			performEffectConsistent(entity, entity.getActivePotionEffect(ModPotions.TIME_STOP_EFFECT).getAmplifier());
-		}
-	}
-	
-	@SubscribeEvent
-	public static void onPotionAddedEvent(PotionAddedEvent event) {
-		if (event.getEntity().world.isRemote && event.getPotionEffect().getPotion() == ModPotions.TIME_STOP_EFFECT
-				&& event.getEntity() instanceof EntityPlayer) {
-			Main.proxy.loadShader((EntityPlayer)event.getEntity(), SHADER);
-		}
-	}
-
-	@SubscribeEvent
-	public static void tick(TickEvent.WorldTickEvent event) {
-		if (!event.world.isRemote && event.phase == TickEvent.Phase.END) {
-			cleanUpEntities(event.world);
-		}
-	}
-
-	@SubscribeEvent
-	public static void onPlayerLoggedOutEvent(PlayerLoggedOutEvent event) {
-		if (event.player.updateBlocked) {
-			event.player.updateBlocked = false;
 		}
 	}
 }

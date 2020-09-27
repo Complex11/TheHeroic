@@ -56,14 +56,14 @@ public class HermesBlade extends ItemBase {
 					}
 				}
 			}
-			HeroicUtil.damageAndCheckItem(item);
+			HeroicUtil.damageAndCheckItem(item, 1);
 		} else {
 			RayTraceResult traced = player.rayTrace(40, 1.0f);
 			Vec3d look = traced.hitVec;
 			HeroicUtil.SpecialTeleport(look.x, look.y, look.z, player);
 			player.playSound(SoundEvents.ENTITY_ARROW_SHOOT, 0.9f, 1.6f);
 			player.getCooldownTracker().setCooldown(this, 70);
-			HeroicUtil.damageAndCheckItem(item);
+			HeroicUtil.damageAndCheckItem(item, 1);
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}

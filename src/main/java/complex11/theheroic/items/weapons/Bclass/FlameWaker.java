@@ -20,12 +20,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class FlameWaker extends ToolSword {
 
-	public static double killCount = 4;
+	public static double hitCount = 0;
 	
 	public FlameWaker(String name, ToolMaterial material) {
 		super(name, material);
@@ -36,18 +37,18 @@ public class FlameWaker extends ToolSword {
 	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
 		if (entity instanceof EntityLivingBase) {
 			if (entity.isBurning()) {
-				entity.attackEntityFrom(DamageSource.LAVA, (float) killCount * 2);
+				entity.attackEntityFrom(DamageSource.LAVA, (float) hitCount * 2 + 6);
 				player.setHealth(player.getHealth() + 2);
 			} else {
-				entity.attackEntityFrom(DamageSource.LAVA, (float) killCount);
+				entity.attackEntityFrom(DamageSource.LAVA, (float) hitCount + 4);
 			}
-			if (killCount < 10) {
-				killCount += 0.5;
-				if (!Double.toString(killCount).contains("\\.")) {
-					HeroicUtil.SendMsgToPlayer("Hellfire: " + killCount, player);
+			if (hitCount < 10) {
+				hitCount += 0.5;
+				if (!Double.toString(hitCount).contains(".5")) {
+					HeroicUtil.SendMsgToPlayer("Hellfire: " + hitCount, player);
 				}
-			} else if (killCount == 10) {
-				killCount = 0;
+			} else if (hitCount == 10) {
+				hitCount = 0;
 				HeroicUtil.SendMsgToPlayer("Transforming Souls...", player);
 				player.inventory.addItemStackToInventory(new ItemStack(Items.BLAZE_POWDER));
 			}
@@ -67,10 +68,15 @@ public class FlameWaker extends ToolSword {
 
 	@Override
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
+		if (entity.world.getTotalWorldTime() % 20 == 0) {
+			HeroicUtil.spawnParticleCircleAroundEntity((EntityLivingBase) entity, EnumParticleTypes.FLAME, 3f);
+		}
 		List<EntityLivingBase> list = HeroicUtil.getEntitiesWithinRadius(3, entity.posX, entity.posY, entity.posZ, world);
 		list.removeIf(Predicates.instanceOf(EntityPlayer.class));
 		for (Entity entityNear : list) {
-			entityNear.setFire(2);
+			if (entity instanceof EntityLivingBase) {
+				entityNear.setFire(3);
+			}
 		}
     }
 	

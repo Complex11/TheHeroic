@@ -23,7 +23,7 @@ public class RealityFragment extends ItemBase implements IHasModel {
 		if (entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 			Random rand = player.getRNG();
-			if (rand.nextDouble() > 0.9999) {
+			if (rand.nextFloat() > 0.9 && rand.nextFloat() > 0.7 && rand.nextFloat() < 0.1) {
 				HeroicUtil.SpecialTeleport(player.posX + rand.nextInt(10), player.posY + rand.nextInt(5),
 						player.posZ + rand.nextInt(10), player);
 			}

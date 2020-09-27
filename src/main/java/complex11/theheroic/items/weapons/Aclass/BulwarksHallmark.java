@@ -42,7 +42,7 @@ public class BulwarksHallmark extends ItemBase {
 				HeroicUtil.Lifesteal(8, player, entityLiving);
 			}
 			player.playSound(SoundEvents.ENTITY_LIGHTNING_IMPACT, 1.6f, 1.0f);
-			HeroicUtil.damageAndCheckItem(stack);
+			HeroicUtil.damageAndCheckItem(stack, 1);
 			return false;
 		}
 		return false;

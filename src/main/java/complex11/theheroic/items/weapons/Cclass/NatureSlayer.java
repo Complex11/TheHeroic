@@ -47,7 +47,7 @@ public class NatureSlayer extends ToolSword {
 			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0, false, false));
 			player.inventory.clearMatchingItems(Items.APPLE, 0, 1, null);
 		}
-		HeroicUtil.damageAndCheckItem(item);
+		HeroicUtil.damageAndCheckItem(item, 1);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
@@ -57,6 +57,6 @@ public class NatureSlayer extends ToolSword {
 	
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":cclass/nature_slayer", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/nature_slayer", "inventory"));
 	}
 }

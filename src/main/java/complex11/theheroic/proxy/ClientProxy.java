@@ -1,5 +1,6 @@
 package complex11.theheroic.proxy;
 
+import complex11.theheroic.init.ModKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +25,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
+		ModKeybinds.init();
 	}
 	
 	@Override

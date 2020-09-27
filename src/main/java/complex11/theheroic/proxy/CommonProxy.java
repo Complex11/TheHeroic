@@ -1,7 +1,6 @@
 package complex11.theheroic.proxy;
 
 import complex11.theheroic.init.ModEntities;
-import complex11.theheroic.init.ModNetworking;
 import complex11.theheroic.util.handlers.RegistryHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +15,6 @@ public class CommonProxy {
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	
 	public void preInit(FMLPreInitializationEvent event) {
-		ModNetworking.registerSimpleNetworking();
 		ModEntities.registerEntities();
 		RegistryHandler.preInitRegistries();
 	}

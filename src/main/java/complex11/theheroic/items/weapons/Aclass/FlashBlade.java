@@ -51,7 +51,6 @@ public class FlashBlade extends ToolSword {
 			AxisAlignedBB bb = player.getEntityBoundingBox();
 			bb = bb.grow(14.0, 3, 14.0);
 			List<Entity> list = worldIn.getEntitiesInAABBexcluding(player, bb, Predicates.instanceOf(EntityLivingBase.class));
-			list.removeIf(t -> t instanceof EntityPlayer);
 			for (Entity entity : list) {
 				HeroicUtil.SpecialTeleport(entity.posX, entity.posY, entity.posZ, player);
 				if (entity instanceof EntityLivingBase) {
@@ -63,10 +62,10 @@ public class FlashBlade extends ToolSword {
 			}
 			player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 0.8f, 2.0f);
 			player.playSound(SoundEvents.ENTITY_SPLASH_POTION_BREAK, 0.66f, 1.5f);
-			HeroicUtil.damageAndCheckItem(item);
+			HeroicUtil.damageAndCheckItem(item, 1);
 		} else {
 			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 10, true, false));
-			HeroicUtil.damageAndCheckItem(item);
+			HeroicUtil.damageAndCheckItem(item, 1);
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}

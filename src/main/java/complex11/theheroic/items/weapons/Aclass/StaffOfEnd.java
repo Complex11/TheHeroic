@@ -99,7 +99,7 @@ public class StaffOfEnd extends ItemBase {
             }
         }		
         ItemStack stack = playerIn.getHeldItem(handIn);
-        HeroicUtil.damageAndCheckItem(stack);
+        HeroicUtil.damageAndCheckItem(stack, 1);
 	    playerIn.playSound(SoundEvents.BLOCK_PORTAL_TRAVEL, 0.44f, 1.8f);
 		playerIn.getCooldownTracker().setCooldown(this, 20);
 		return super.onItemRightClick(worldIn, playerIn, handIn);

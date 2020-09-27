@@ -52,9 +52,8 @@ public class DeathMark extends ToolSword {
 	}
 	
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
-    {
-		HeroicUtil.damageAndCheckItem(stack);
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		HeroicUtil.damageAndCheckItem(stack, 1);
         return true;
     }
 	
@@ -72,7 +71,7 @@ public class DeathMark extends ToolSword {
 				HeroicUtil.spawnParticleAtEntity((EntityLivingBase) entity, EnumParticleTypes.SMOKE_NORMAL, 40);
 			}
 		}
-		HeroicUtil.damageAndCheckItem(item);
+		HeroicUtil.damageAndCheckItem(item, 1);
 		player.playSound(SoundEvents.ENTITY_WITHER_AMBIENT, 0.5f, 0.45f);
 		player.getCooldownTracker().setCooldown(this, 60);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);

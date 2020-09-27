@@ -118,7 +118,7 @@ public class HellfireBlaze extends ItemBase {
 				
 		}
 		playerIn.playSound(SoundEvents.ENTITY_GENERIC_BURN, 1.5f, 1.0f);
-		HeroicUtil.damageAndCheckItem(item);
+		HeroicUtil.damageAndCheckItem(item, 1);
 		playerIn.getCooldownTracker().setCooldown(this, 30);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}

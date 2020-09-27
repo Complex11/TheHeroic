@@ -16,6 +16,7 @@ import complex11.theheroic.items.weapons.Bclass.FlameWaker;
 import complex11.theheroic.items.weapons.Cclass.GlassyEdge;
 import complex11.theheroic.items.weapons.Cclass.NatureSlayer;
 import complex11.theheroic.items.weapons.Sclass.RealityBlade;
+import complex11.theheroic.items.weapons.Sclass.WrathOfOldGods;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemSword;
@@ -53,6 +54,7 @@ public class ModItems {
 	
 	//S-Class Weapons
 	public static final ItemSword REALITY_BLADE = new RealityBlade("reality_blade", MATERIAL_UNKNOWN);
+	public static final Item WRATH_OF_OLD_GODS = new WrathOfOldGods("wrath_of_old_gods");
 	
 	
 }

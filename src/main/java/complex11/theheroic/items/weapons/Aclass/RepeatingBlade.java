@@ -54,7 +54,7 @@ public class RepeatingBlade extends ToolSword {
 
 			}
 		}
-		HeroicUtil.damageAndCheckItem(item);
+		HeroicUtil.damageAndCheckItem(item, 1);
 		player.playSound(SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, 0.6f, 0.7f);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
