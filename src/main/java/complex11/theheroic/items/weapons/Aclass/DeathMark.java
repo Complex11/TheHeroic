@@ -12,7 +12,6 @@ import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,8 +37,9 @@ public class DeathMark extends ToolSword {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add(I18n.format("Hitting entities with this marks them for death."));
-		tooltip.add(I18n.format("Right-click to send them to Hell!"));
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7Normal attacks mark targets for death.");
+		tooltip.add("§d§lSpecial Ability: §r§7Kill all marked targets in a radius[30]. §fCooldown: 30 seconds.");
 	}
 	
 	@Override
@@ -47,21 +47,16 @@ public class DeathMark extends ToolSword {
 		super.onLeftClickEntity(stack, player, entity);
 		if (entity instanceof EntityLivingBase) {
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(ModPotions.DEATHMARK_EFFECT));
+			HeroicUtil.damageAndCheckItem(stack, 1);
 		}
 		return false;
 	}
 	
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		HeroicUtil.damageAndCheckItem(stack, 1);
-        return true;
-    }
-	
-	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
 		AxisAlignedBB bb = player.getEntityBoundingBox();
-		bb = bb.grow(30.0, 10, 30.0);
+		bb = bb.grow(30.0, 10.0, 30.0);
 		List<Entity> list = worldIn.getEntitiesInAABBexcluding(player, bb, Predicates.instanceOf(EntityLivingBase.class));
 		list.removeIf(t -> t instanceof EntityPlayer);
 		for (Entity entity : list) {
@@ -73,7 +68,7 @@ public class DeathMark extends ToolSword {
 		}
 		HeroicUtil.damageAndCheckItem(item, 1);
 		player.playSound(SoundEvents.ENTITY_WITHER_AMBIENT, 0.5f, 0.45f);
-		player.getCooldownTracker().setCooldown(this, 60);
+		player.getCooldownTracker().setCooldown(this, 600);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 	

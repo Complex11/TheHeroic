@@ -83,7 +83,7 @@ public class PotionEvent {
 	public static void onLivingUpdate(LivingUpdateEvent event) {
 		EntityLivingBase entity = event.getEntityLiving();
 		if (entity.isPotionActive(ModPotions.BLEED_EFFECT)) {
-			if (entity.getRNG().nextInt(200) < 10 && entity.getRNG().nextDouble() > 0.1) {
+			if (entity.world.getWorldTime() % 20 == 0) {
 				entity.attackEntityFrom(DamageSource.GENERIC, 1);
 				HeroicUtil.spawnParticleAtEntity(entity, EnumParticleTypes.DAMAGE_INDICATOR, 1);
 			}
@@ -98,7 +98,7 @@ public class PotionEvent {
 	public static void onLivingUpdateSoul(LivingUpdateEvent event) {
 		if (event.getEntity() instanceof EntityLivingBase) {
 			EntityLivingBase entity = (EntityLivingBase) event.getEntity();
-			if (entity.isPotionActive(ModPotions.SOUL_REMOVAL_EFFECT)) {
+			if (entity.isPotionActive(ModPotions.SOUL_REMOVAL_EFFECT) && entity.world.getTotalWorldTime() % 20 == 0) {
 				entity.addPotionEffect(new PotionEffect(ModPotions.SOUL_REMOVAL_EFFECT, 100, 1, true, false));
 				entity.setHealth((float) (0.95 * entity.getHealth()));
 				if (entity.getHealth() < 2) {

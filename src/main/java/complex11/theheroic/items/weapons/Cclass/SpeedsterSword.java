@@ -13,21 +13,21 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class NatureSlayer extends ToolSword {
+public class SpeedsterSword extends ToolSword {
 
-	private static int count = 0;
-	
-	public NatureSlayer(String name, ToolMaterial material) {
+	private static double count = 0;
+
+	public SpeedsterSword(String name, ToolMaterial material) {
 		super(name, material);
 		setCreativeTab(Main.heroicweaponstabC);
 	}
@@ -36,19 +36,16 @@ public class NatureSlayer extends ToolSword {
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
 		tooltip.add("§9§lClass: §eC");
-		tooltip.add("§d§lPassive: §r§7Normal attacks give sticks. Every 30th attack gives an apple.");
-		tooltip.add("§d§lSpecial Ability: §r§7Consumes an apple in exchange for §2Regeneration[10s]§7. §fCooldown: 0 seconds.");
+		tooltip.add("§d§lPassive: §7Normal attacks build §6Speedy Stacks§7 and do 4 damage.");
+		tooltip.add("§d§lSpecial Ability: §7Consumes 10 §6Speedy Stacks§7 and applies §2Speed[3] for 1 minute.");
+		tooltip.add("§4§lAura: §7While the wielder has more than 20 §6Speedy Stacks§7, grant §2Speed[1]§7.");
 	}
 	
 	@Override
 	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
 		if (entity instanceof EntityLivingBase) {
-			player.inventory.addItemStackToInventory(new ItemStack(Items.STICK));
-			count++;
-			if (count > 30) {
-				player.inventory.addItemStackToInventory(new ItemStack(Items.APPLE));
-				count = 0;
-			}
+			count += 0.5;
+			entity.attackEntityFrom(DamageSource.GENERIC, 4);
 		}
 		return false;
 	}
@@ -56,20 +53,23 @@ public class NatureSlayer extends ToolSword {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
-		if (player.inventory.hasItemStack(new ItemStack(Items.APPLE))) {
-			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0, false, false));
-			player.inventory.clearMatchingItems(Items.APPLE, 0, 1, null);
+		if (count > 10) {
+			count -= 10;
+			player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 1200, 2, false, false));
+			HeroicUtil.damageAndCheckItem(item, 1);
 		}
-		HeroicUtil.damageAndCheckItem(item, 1);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
 	@Override
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
+		if (count > 20 && entity instanceof EntityLivingBase) {
+			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SPEED, 200, 0, false, false));
+		}
     }
 	
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/nature_slayer", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/speedster_sword", "inventory"));
 	}
 }

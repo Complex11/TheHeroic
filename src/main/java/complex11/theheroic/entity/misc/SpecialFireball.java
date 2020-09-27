@@ -19,7 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SpecialFireball extends EntityFireball {
 	
-	public float damage = 0;
 	public float radius = 0;
 	public int damageCooldown = 1;
 	public int duration = 1;

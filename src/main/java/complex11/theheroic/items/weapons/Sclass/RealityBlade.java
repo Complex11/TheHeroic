@@ -3,12 +3,15 @@ package complex11.theheroic.items.weapons.Sclass;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+
 import complex11.theheroic.Main;
 import complex11.theheroic.init.ModPotions;
 import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.RayTraceResult;
@@ -39,8 +41,17 @@ public class RealityBlade extends ToolSword {
 		super(name, material);
 		setCreativeTab(Main.heroicweaponstabS);
 	}
-
-	EnumFacing[] facings = { EnumFacing.DOWN, EnumFacing.EAST, EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.WEST };
+	
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §6S");
+		tooltip.add("§d§lPassive: §r§7Normal attacks trap targets in Limbo, making their status §6Unknown§7. Attacking §6Unknown §7targets remove them from this plane of existence.");
+		tooltip.add("§d§lSpecial Ability: §r§7Gain 11 seconds of §2Stopped Time[1]§7. §fCooldown: 20 seconds.");
+		tooltip.add("§d§lBonus Ability: §r§7For each entity in a radius[25], gain 10 seconds of §2Regeneration[4]§7, §2Resistance[2]§7 and §2Outer-Dimensional[1]§7. §fCooldown: 30 seconds.");
+		tooltip.add("§d§lBonus Ability II: §r§7Teleports a maximum of 100 blocks in the direction faced. §fCooldown: 4 seconds.");
+		tooltip.add("§4§lAura: §r§7If the time contains §2\"11:11\"§7, add 1 Bedrock to the wielder's inventory.");
+	}
 	
 	@Override
 	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
@@ -68,10 +79,10 @@ public class RealityBlade extends ToolSword {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
 		if (player.isSneaking() && !realityWarp) {
-			List<EntityLivingBase> list = HeroicUtil.getEntitiesWithinRadius(50, player.posX, player.posY, player.posZ, worldIn);
+			List<EntityLivingBase> list = HeroicUtil.getEntitiesWithinRadius(25, player.posX, player.posY, player.posZ, worldIn);
 			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200 * list.size(), 3, false, false));
-			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200 * list.size(), 3, false, false));
-			player.addPotionEffect(new PotionEffect(ModPotions.FOUR_DIMENSION_EFFECT, 400, 0, false, false));
+			player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200 * list.size(), 1, false, false));
+			player.addPotionEffect(new PotionEffect(ModPotions.FOUR_DIMENSION_EFFECT, 200 * list.size(), 0, false, false));
 			player.getCooldownTracker().setCooldown(this, 600);
 			player.playSound(SoundEvents.ENTITY_WITHER_DEATH, 0.8f, 0.35f);
 		} else if (player.isSneaking() && realityWarp) {

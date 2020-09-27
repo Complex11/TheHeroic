@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "theheroic:items/weapons/cclass/blade_of_minor_wounds"
+   }
+}

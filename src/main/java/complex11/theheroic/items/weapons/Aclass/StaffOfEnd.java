@@ -2,6 +2,8 @@ package complex11.theheroic.items.weapons.Aclass;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import complex11.theheroic.Main;
 import complex11.theheroic.entity.misc.SpecialPearl;
 import complex11.theheroic.init.ModPotions;
@@ -11,6 +13,7 @@ import complex11.theheroic.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +44,14 @@ public class StaffOfEnd extends ItemBase {
 		}
         return true;
     }
+	
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7Normal attacks remove targets' souls over time, leaving them extremely weak with 2 health.");
+		tooltip.add("§d§lSpecial Ability: §r§7Shoots a beam that does 80% of target's health + 8 OR 56% of target's heath + 6, depending on how close the beam is to the target. Also shoots 6 explosive pearls that do 6 damage each and apply random negative effects on hit. §fCooldown: 10 seconds.");
+	}
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -89,11 +100,11 @@ public class StaffOfEnd extends ItemBase {
 	            if (entity instanceof EntityLivingBase) {
 	            	if (distance > radiusInner && distance < radiusOuter) {
 	           			HeroicUtil.PercentageAttack(0.2f, (EntityLivingBase) entity);
-	           			entity.attackEntityFrom(DamageSource.causeMobDamage(playerIn), 10f);
+	           			entity.attackEntityFrom(DamageSource.causeMobDamage(playerIn), 8f);
 	           		}
 	       			if (distance < radiusInner) {
 	       				HeroicUtil.PercentageAttack(0.44f, (EntityLivingBase) entity);
-	           			entity.attackEntityFrom(DamageSource.causeMobDamage(playerIn), 8f);
+	           			entity.attackEntityFrom(DamageSource.causeMobDamage(playerIn), 6f);
 	       			}
 	            }
             }
@@ -101,7 +112,7 @@ public class StaffOfEnd extends ItemBase {
         ItemStack stack = playerIn.getHeldItem(handIn);
         HeroicUtil.damageAndCheckItem(stack, 1);
 	    playerIn.playSound(SoundEvents.BLOCK_PORTAL_TRAVEL, 0.44f, 1.8f);
-		playerIn.getCooldownTracker().setCooldown(this, 20);
+		playerIn.getCooldownTracker().setCooldown(this, 200);
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	

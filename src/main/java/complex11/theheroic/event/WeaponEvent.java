@@ -1,11 +1,16 @@
 package complex11.theheroic.event;
 
 import complex11.theheroic.init.ModItems;
+import complex11.theheroic.items.weapons.Bclass.StreamsOfPain;
+import complex11.theheroic.items.weapons.Cclass.SpecialShock;
 import complex11.theheroic.items.weapons.Sclass.RealityBlade;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -73,4 +78,39 @@ public class WeaponEvent {
 	}
 	
 	//END REALITY BLADE
+	
+	//START SPECIAL SHOCK
+	
+	@SubscribeEvent
+	public static void shockedUpdate(LivingUpdateEvent event) {
+		if (event.getEntityLiving().getEntityData().getBoolean(SpecialShock.NBT_KEY)) {
+			if (event.getEntityLiving().world.getTotalWorldTime() % 20 == 0) {
+				HeroicUtil.spawnParticleAtEntity(event.getEntityLiving(), EnumParticleTypes.SMOKE_NORMAL, 2);
+			}
+		}
+	}
+	
+	//END SPECIAL SHOCK
+	
+	//START STREAMS OF PAIN
+	
+	@SubscribeEvent
+	public static void drownedUpdate(LivingUpdateEvent event) {
+		if (event.getEntityLiving().getEntityData().getBoolean(StreamsOfPain.NBT_KEY)) {
+			EntityLivingBase entity = event.getEntityLiving();
+			if (entity.world.getTotalWorldTime() % 20 == 0) {
+				StreamsOfPain.air = StreamsOfPain.air - 20;
+				if (StreamsOfPain.air < 0) {
+					entity.attackEntityFrom(DamageSource.DROWN, 4);
+				}
+				if (entity.getHealth() < entity.getMaxHealth() * 0.2) {
+					entity.getEntityData().removeTag(StreamsOfPain.NBT_KEY);
+				}
+				HeroicUtil.spawnParticleAtEntity(event.getEntityLiving(), EnumParticleTypes.WATER_SPLASH, 16);
+			}
+		}
+	}
+	
+	//END STREAMS OF PAIN
+	
 }

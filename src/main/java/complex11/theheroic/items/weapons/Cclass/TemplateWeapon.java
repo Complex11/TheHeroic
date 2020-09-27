@@ -1,54 +1,34 @@
 package complex11.theheroic.items.weapons.Cclass;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import complex11.theheroic.Main;
 import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class NatureSlayer extends ToolSword {
-
-	private static int count = 0;
+public class TemplateWeapon extends ToolSword {
 	
-	public NatureSlayer(String name, ToolMaterial material) {
+	private static float damage = 0;
+	
+	public TemplateWeapon(String name, ToolMaterial material) {
 		super(name, material);
 		setCreativeTab(Main.heroicweaponstabC);
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §eC");
-		tooltip.add("§d§lPassive: §r§7Normal attacks give sticks. Every 30th attack gives an apple.");
-		tooltip.add("§d§lSpecial Ability: §r§7Consumes an apple in exchange for §2Regeneration[10s]§7. §fCooldown: 0 seconds.");
-	}
-	
-	@Override
 	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
 		if (entity instanceof EntityLivingBase) {
-			player.inventory.addItemStackToInventory(new ItemStack(Items.STICK));
-			count++;
-			if (count > 30) {
-				player.inventory.addItemStackToInventory(new ItemStack(Items.APPLE));
-				count = 0;
-			}
+			entity.attackEntityFrom(DamageSource.GENERIC, damage);
 		}
 		return false;
 	}
@@ -56,10 +36,7 @@ public class NatureSlayer extends ToolSword {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
-		if (player.inventory.hasItemStack(new ItemStack(Items.APPLE))) {
-			player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 0, false, false));
-			player.inventory.clearMatchingItems(Items.APPLE, 0, 1, null);
-		}
+
 		HeroicUtil.damageAndCheckItem(item, 1);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
@@ -70,6 +47,6 @@ public class NatureSlayer extends ToolSword {
 	
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/nature_slayer", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/", "inventory"));
 	}
 }

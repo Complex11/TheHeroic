@@ -54,4 +54,5 @@ public class TextUtil {
 		}
 		return outputString + TextFormatting.WHITE;
 	}
+	
 }

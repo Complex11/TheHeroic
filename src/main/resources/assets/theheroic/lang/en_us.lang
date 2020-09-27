@@ -5,11 +5,15 @@ item.reality_fragment.name=Reality Fragment
 //weapons
 
 //C-Class
-item.nature_slayer.name=Garden Special
+item.nature_slayer.name=Nature Slayer
 item.glassy_edge.name=Glassy Edge
+item.blade_of_minor_wounds.name=Blade Of Minor Wounds
+item.special_shock.name=Special Shock
+item.speedster_sword.name=Speedster's Sword
 
 //B-Class
 item.flamewaker.name=Flamewaker
+item.streams_of_pain.name=Streams Of Pain
 
 //A-Class
 item.flash_blade.name=Flashy Blade

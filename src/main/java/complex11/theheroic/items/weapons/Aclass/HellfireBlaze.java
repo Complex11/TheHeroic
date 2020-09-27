@@ -2,6 +2,8 @@ package complex11.theheroic.items.weapons.Aclass;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Predicates;
 
 import complex11.theheroic.Main;
@@ -12,6 +14,7 @@ import complex11.theheroic.util.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +42,19 @@ public class HellfireBlaze extends ItemBase {
 	}
 	
 	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7None");
+		tooltip.add("§d§lSpecial Ability: §r§7Perform one of §cHell's Attacks. §fCooldown: 5 seconds.");
+		tooltip.add("§c§lHell's Attacks:");
+		tooltip.add("§c-Hell's Wrath: Shoot a large fireball that does 30 explosive damage.");
+		tooltip.add("§c-Flaming Rites: Transform the blocks below all entities in a radius[13] into lava. For each entity in the radius, gain 2 health and a random positive effect.");
+		tooltip.add("§c-Ray of Fire: Fire a ray that explodes on impact.");
+		tooltip.add("§4§lAura: §r§2Fire Resistance[1] §7while held.");
+	}
+	
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		playerIn.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 60, 3, false, false));
 		ItemStack item = playerIn.getHeldItem(handIn);
@@ -54,18 +70,17 @@ public class HellfireBlaze extends ItemBase {
 				fireball.accelerationX = dir.x;
 				fireball.accelerationY = dir.y;
 				fireball.accelerationZ = dir.z;
-				fireball.damage = 360;
 				fireball.damageCooldown = 4;
 				fireball.radius = 6;
 				fireball.duration = 500;
-				fireball.explosionDamage = 50;
+				fireball.explosionDamage = 30;
 				fireball.explosionPower = 5;
 				fireball.doExplosionDestroyBlocks = true;
 				worldIn.spawnEntity(fireball);
 				break;
 			case 1:
 				AxisAlignedBB bb = playerIn.getEntityBoundingBox();
-				bb = bb.grow(13.0, 5, 13.0);
+				bb = bb.grow(13.0, 5.0, 13.0);
 				List<Entity> list = worldIn.getEntitiesInAABBexcluding(playerIn, bb, Predicates.instanceOf(EntityLivingBase.class));
 				int EntityCounter = 0;
 				for (Entity entity : list) {
@@ -119,7 +134,7 @@ public class HellfireBlaze extends ItemBase {
 		}
 		playerIn.playSound(SoundEvents.ENTITY_GENERIC_BURN, 1.5f, 1.0f);
 		HeroicUtil.damageAndCheckItem(item, 1);
-		playerIn.getCooldownTracker().setCooldown(this, 30);
+		playerIn.getCooldownTracker().setCooldown(this, 100);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 	

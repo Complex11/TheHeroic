@@ -2,11 +2,14 @@ package complex11.theheroic.items.weapons.Aclass;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import complex11.theheroic.Main;
 import complex11.theheroic.items.ItemBase;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -25,6 +28,8 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class HermesBlade extends ItemBase {
 
+	public static final String NBT_KEY = "heart_pierced";
+	
 	public HermesBlade(String name, ToolMaterial material) {
 		super(name);
 		setMaxDamage(12000);
@@ -32,10 +37,19 @@ public class HermesBlade extends ItemBase {
 	}
 
 	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7Normal attacks make targets §cHeartpierced §7and also do 10 bleed damage.");
+		tooltip.add("§d§lSpecial Ability: §r§7All entities in the world that are  §cHeartpierced§7 are struck by lightning. §fCooldown: 3 seconds.");
+		tooltip.add("§d§lBonus Ability: §r§7Teleports a maximum of 40 blocks in the direction faced. §fCooldown: 3.5 seconds.");
+	}
+	
+	@Override
 	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
 		if (entity instanceof EntityLivingBase) {
-			if (!entity.getTags().contains("Heart Pierced")) {
-				entity.getEntityData().setBoolean("Heart Pierced", true);
+			if (!entity.getEntityData().getBoolean(NBT_KEY)) {
+				entity.getEntityData().setBoolean(NBT_KEY, true);
 			}
 			HeroicUtil.BleedAttack(2f, 5, (EntityLivingBase) entity);
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1);
@@ -51,11 +65,12 @@ public class HermesBlade extends ItemBase {
 			list.removeIf(t -> t instanceof EntityPlayer);
 			for (Entity entity : list) {
 				if (entity instanceof EntityLivingBase) {
-					if (entity.getTags().contains("Heart Pierced")) {
+					if (entity.getEntityData().getBoolean(NBT_KEY)) {
 						worldIn.spawnEntity(new EntityLightningBolt(worldIn, entity.posX, entity.posY, entity.posZ, false));
 					}
 				}
 			}
+			player.getCooldownTracker().setCooldown(this, 60);
 			HeroicUtil.damageAndCheckItem(item, 1);
 		} else {
 			RayTraceResult traced = player.rayTrace(40, 1.0f);

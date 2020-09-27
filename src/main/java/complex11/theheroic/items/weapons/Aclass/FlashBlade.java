@@ -2,6 +2,8 @@ package complex11.theheroic.items.weapons.Aclass;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Predicates;
 
 import complex11.theheroic.Main;
@@ -9,6 +11,7 @@ import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,11 +48,21 @@ public class FlashBlade extends ToolSword {
 	}
 	
 	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7Normal attacks deal damage based on target's health.");
+		tooltip.add("§d§lSpecial Ability: §r§7Teleports to all entities in a radius[14] and attacks them for 34% of their current health + 8 magic damage. §fCooldown: 0 seconds.");
+		tooltip.add("§d§lBonus Ability: §r§7Grants §2Speed[11] §7for 10 seconds.");
+		tooltip.add("§4§lAura: §r§2Speed[2] §7while held if §2Speed §7is not already active.");
+	}
+	
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
 		if (player.isSneaking()) {
 			AxisAlignedBB bb = player.getEntityBoundingBox();
-			bb = bb.grow(14.0, 3, 14.0);
+			bb = bb.grow(14.0, 3.0, 14.0);
 			List<Entity> list = worldIn.getEntitiesInAABBexcluding(player, bb, Predicates.instanceOf(EntityLivingBase.class));
 			for (Entity entity : list) {
 				HeroicUtil.SpecialTeleport(entity.posX, entity.posY, entity.posZ, player);

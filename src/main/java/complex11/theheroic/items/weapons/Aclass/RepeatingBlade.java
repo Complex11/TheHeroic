@@ -2,12 +2,15 @@ package complex11.theheroic.items.weapons.Aclass;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Predicates;
 
 import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,18 +35,24 @@ public class RepeatingBlade extends ToolSword {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		super.onLeftClickEntity(stack, player, entity);
 		if (entity instanceof EntityLivingBase) {
-			for (int i = 0; i < 5; i++) {
-				entity.attackEntityFrom(DamageSource.causePlayerDamage(player), (float) (3 * Math.pow(1.1, i)));
-			}
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 12);
 		}
 		return true;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§d§lPassive: §r§7None.");
+		tooltip.add("§d§lSpecial Ability: §r§7Deals damage to all entities in a radius[5]. For each entity in this radius, damage is multiplied. §fCooldown: 0 seconds.");
 	}
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
 		AxisAlignedBB bb = player.getEntityBoundingBox();
-		bb = bb.grow(5.0, 2, 5.0);
+		bb = bb.grow(5.0, 2.0, 5.0);
 		List<Entity> list = worldIn.getEntitiesInAABBexcluding(player, bb, Predicates.instanceOf(EntityLivingBase.class));
 		list.removeIf(t -> t instanceof EntityPlayer);
 		int size = list.size();
