@@ -36,6 +36,7 @@ public class RealityBlade extends ToolSword {
 	public static boolean realityBend = false;
 	public static boolean realityWarp = false;
 	public static Random rand = new Random();
+	private static float damage = 11;
 	
 	public RealityBlade(String name, ToolMaterial material) {
 		super(name, material);
@@ -45,34 +46,34 @@ public class RealityBlade extends ToolSword {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §6S");
-		tooltip.add("§d§lPassive: §r§7Normal attacks trap targets in Limbo, making their status §6Unknown§7. Attacking §6Unknown §7targets remove them from this plane of existence.");
+		tooltip.add("§9§lClass: §1S");
+		tooltip.add("§d§lPassive: §r§7Normal attacks trap targets in Limbo, making their status §3Unknown§7. Attacking §3Unknown §7targets remove them from this plane of existence. Targets with less than 11 health are removed immediately.");
 		tooltip.add("§d§lSpecial Ability: §r§7Gain 11 seconds of §2Stopped Time[1]§7. §fCooldown: 20 seconds.");
 		tooltip.add("§d§lBonus Ability: §r§7For each entity in a radius[25], gain 10 seconds of §2Regeneration[4]§7, §2Resistance[2]§7 and §2Outer-Dimensional[1]§7. §fCooldown: 30 seconds.");
 		tooltip.add("§d§lBonus Ability II: §r§7Teleports a maximum of 100 blocks in the direction faced. §fCooldown: 4 seconds.");
 		tooltip.add("§4§lAura: §r§7If the time contains §2\"11:11\"§7, add 1 Bedrock to the wielder's inventory.");
+		tooltip.add("§0§lDeath's Rites: §r§7If the wielder of this would have died, negate death instead. Only activates once.");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLiving) {
-			if (entity.getEntityData().getBoolean(NBT_KEY)) {
-				player.world.removeEntityDangerously(entity);
-				return true;
-			} else {
-				((EntityLiving) entity).setNoAI(true);
-				((EntityLiving) entity).hurtTime = 0;
-				entity.getEntityData().setBoolean(NBT_KEY, true);
-				entity.setSilent(true);
-				entity.extinguish();
-				entity.setFire(0);
-				entity.setGlowing(true);
-				entity.setInvisible(true);
-				HeroicUtil.spawnParticleAtEntity((EntityLivingBase) entity, EnumParticleTypes.SUSPENDED_DEPTH, 80);
-			}
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (target.getEntityData().getBoolean(NBT_KEY) || (target.getHealth() < damage)) {
+			attacker.world.removeEntityDangerously(target);
+			return true;
+		} else {
+			((EntityLiving) target).setNoAI(true);
+			((EntityLiving) target).hurtTime = 0;
+			target.getEntityData().setBoolean(NBT_KEY, true);
+			target.setSilent(true);
+			target.extinguish();
+			target.setFire(0);
+			target.setGlowing(true);
+			target.setInvisible(true);
+			HeroicUtil.spawnParticleAtEntity(target, EnumParticleTypes.SUSPENDED_DEPTH, 80);
 		}
-		player.playSound(SoundEvents.AMBIENT_CAVE, 1.0f, 1.0f);
-		return false;
+		attacker.playSound(SoundEvents.AMBIENT_CAVE, 1.0f, 1.0f);
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 	
 	@Override
@@ -96,7 +97,6 @@ public class RealityBlade extends ToolSword {
 			player.getCooldownTracker().setCooldown(this, 400);
 			player.playSound(SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, 1.1f, 0.35f);
 		}
-		
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 

@@ -1,7 +1,6 @@
 package complex11.theheroic.items.weapons.Cclass;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.annotation.Nullable;
 
@@ -24,16 +23,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
-public class BladeOfMinorWounds extends ToolSword {
-
-	private static Random rand = new Random();
+public class ToughGuy extends ToolSword {
 	
-	private static PotionEffect[] effects = { new PotionEffect(MobEffects.ABSORPTION, 200, 0, false, false),
-			new PotionEffect(MobEffects.REGENERATION, 200, 0, false, false),
-			new PotionEffect(MobEffects.SPEED, 200, 0, false, false),
-			new PotionEffect(MobEffects.STRENGTH, 200, 0, false, false) };
-
-	public BladeOfMinorWounds (String name, ToolMaterial material) {
+	private static float damage = 4;
+	
+	public ToughGuy(String name, ToolMaterial material) {
 		super(name, material);
 		setCreativeTab(Main.heroicweaponstabC);
 	}
@@ -41,20 +35,18 @@ public class BladeOfMinorWounds extends ToolSword {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §eA");
-		tooltip.add("§d§lPassive: §r§7Normal attacks deal damage based on wielder's health. If the wielder's health is greater than half their total, deal 5 damage. Otherwise, deal 2 damage.");
-		tooltip.add("§d§lSpecial Ability: §r§7Gain a random positive effect and consume 10 durability. §fCooldown: 0 seconds.");
-		tooltip.add("§4§lAura: §r§70.001 chance to restore 0.5 health while held.");
+		tooltip.add("§9§lClass: §eC");
+		tooltip.add("§d§lPassive: §r§7Normal attacks heal for 2 health. If the target has less than 40% health, heal for another 6 health.");
+		tooltip.add("§d§lSpecial Ability: §r§7Heal for 2 health. If already at maximum health, gain §2Strength[2] §7for 1 minute instead.");
+		tooltip.add("§4§lAura: §r§2Absorption[5] §7while held.");
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (attacker.getHealth() > attacker.getMaxHealth() * 0.5) {
-			target.attackEntityFrom(DamageSource.MAGIC, 5);
-		} else {
-			attacker.setHealth(attacker.getHealth() + 1);
-			target.attackEntityFrom(DamageSource.GENERIC, 2);
-			return true;
+		target.attackEntityFrom(DamageSource.GENERIC, damage);
+		HeroicUtil.Lifesteal(2, attacker, target);
+		if (target.getHealth() < target.getMaxHealth() * 0.4) {
+			HeroicUtil.Lifesteal(6, attacker, target);
 		}
 		HeroicUtil.damageAndCheckItem(stack, 1);
 		return true;
@@ -63,8 +55,11 @@ public class BladeOfMinorWounds extends ToolSword {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
 		ItemStack item = player.getHeldItem(handIn);
-		player.addPotionEffect(effects[rand.nextInt(3)]);
-		HeroicUtil.damageAndCheckItem(item, 10);
+		player.setHealth(player.getHealth() + 2);
+		if (player.getHealth() == player.getMaxHealth()) {
+			player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 1200, 1, false, false));
+		}
+		HeroicUtil.damageAndCheckItem(item, 1);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 
@@ -72,14 +67,12 @@ public class BladeOfMinorWounds extends ToolSword {
     public void onUpdate(ItemStack itemstack, World world, Entity entity, int i, boolean flag) {
 		if (entity instanceof EntityLivingBase) {
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
-			if (entityLiving.getHealth() < entityLiving.getMaxHealth() && rand.nextInt(1000) < 2) {
-				entityLiving.setHealth(entityLiving.getHealth() + 1);
-			}
+			entityLiving.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 3000, 4, false, false));
 		}
     }
 	
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/blade_of_minor_wounds", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/cclass/tough_guy", "inventory"));
 	}
 }

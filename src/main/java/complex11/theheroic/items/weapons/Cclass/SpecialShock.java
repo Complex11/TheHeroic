@@ -40,26 +40,24 @@ public class SpecialShock extends ToolSword {
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
 		tooltip.add("§9§lClass: §eC");
-		tooltip.add("§d§lPassive: §r§7Normal attacks §3Shock §7targets, deal 4 damage and apply §2Slowness[2]§7. If already §3Shocked§7, deal 8 damage and apply §2Slowness[4] and §2Weakness[2] instead.");
-		tooltip.add("§d§lSpecial Ability: §r§7Apply §2Slowness[4]§7, §2Weakness[3] §7and §2Wither[1] §7to all entities in a radius[5]. §fCooldown: 10 seconds.");
+		tooltip.add("§d§lPassive: §r§7Normal attacks §3Shock §7targets, deal 4 damage and apply §2Slowness[2]§7. If already §3Shocked§7, deal 8 damage and apply §2Slowness[3] and §2Weakness[1] instead.");
+		tooltip.add("§d§lSpecial Ability: §r§7Apply §2Slowness[2]§7, §2Weakness[1] §7and §2Wither[1] §7to all entities in a radius[5]. §fCooldown: 10 seconds.");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack item, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
-			if (!entity.getEntityData().getBoolean(NBT_KEY)) {
-				entity.getEntityData().setBoolean(NBT_KEY, true);
-				entity.attackEntityFrom(DamageSource.ON_FIRE, 4);
-				HeroicUtil.damageAndCheckItem(item, 1);
-			} else if (entity.getEntityData().getBoolean(NBT_KEY)) {
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 3, false, false));
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 1, false, false));
-				entity.attackEntityFrom(DamageSource.ON_FIRE, 8);
-				HeroicUtil.damageAndCheckItem(item, 2);
-			}
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
+		if (!target.getEntityData().getBoolean(NBT_KEY)) {
+			target.getEntityData().setBoolean(NBT_KEY, true);
+			target.attackEntityFrom(DamageSource.ON_FIRE, 4);
+			HeroicUtil.damageAndCheckItem(stack, 1);
+		} else if (target.getEntityData().getBoolean(NBT_KEY)) {
+			target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 2, false, false));
+			target.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 0, false, false));
+			target.attackEntityFrom(DamageSource.ON_FIRE, 8);
+			HeroicUtil.damageAndCheckItem(stack, 2);
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -71,15 +69,15 @@ public class SpecialShock extends ToolSword {
 		for (Entity entity : list) {
 			EntityLivingBase entityLiving = (EntityLivingBase) entity;
 			if (entityLiving.getEntityData().getBoolean(NBT_KEY)) {
-				entityLiving.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 3, false, false));
-				entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 2, false, false));
+				entityLiving.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 1, false, false));
+				entityLiving.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 200, 0, false, false));
 				entityLiving.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200, 0, false, false));
 				entity.attackEntityFrom(DamageSource.ON_FIRE, 2);
 			}
 		}
-		player.getCooldownTracker().setCooldown(this, 200);
+		player.getCooldownTracker().setCooldown(this, 160);
 		HeroicUtil.spawnParticleCircleAroundEntity(player, EnumParticleTypes.SMOKE_NORMAL, 5);
-		HeroicUtil.damageAndCheckItem(item, 5);
+		HeroicUtil.damageAndCheckItem(item, 3);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 	}
 

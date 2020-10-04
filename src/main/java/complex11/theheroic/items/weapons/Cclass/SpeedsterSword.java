@@ -25,7 +25,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class SpeedsterSword extends ToolSword {
 
-	private static double count = 0;
+	public static double count = 0;
 
 	public SpeedsterSword(String name, ToolMaterial material) {
 		super(name, material);
@@ -38,16 +38,16 @@ public class SpeedsterSword extends ToolSword {
 		tooltip.add("§9§lClass: §eC");
 		tooltip.add("§d§lPassive: §7Normal attacks build §6Speedy Stacks§7 and do 4 damage.");
 		tooltip.add("§d§lSpecial Ability: §7Consumes 10 §6Speedy Stacks§7 and applies §2Speed[3] for 1 minute.");
-		tooltip.add("§4§lAura: §7While the wielder has more than 20 §6Speedy Stacks§7, grant §2Speed[1]§7.");
+		tooltip.add("§4§lAura: §7While the wielder has more than 20 §6Speedy Stacks§7, apply §2Speed[1]§7.");
+		tooltip.add("§6Speedy Stacks: ");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			count += 0.5;
-			entity.attackEntityFrom(DamageSource.GENERIC, 4);
-		}
-		return false;
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		count += 1;
+		target.attackEntityFrom(DamageSource.GENERIC, 4);
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 	
 	@Override

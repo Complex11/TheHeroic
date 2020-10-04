@@ -29,51 +29,46 @@ public class BulwarksHallmark extends ItemBase {
 	}
 
 	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		
-		return true;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7Normal attacks lifesteal for 20% of the target's health.");
-		tooltip.add("§d§lSpecial Ability: §r§7Instantly kills targets which have less than 20% total health or are glowing.");
+		tooltip.add(
+				"§d§lSpecial Ability: §r§7Instantly kills targets which have less than 20% total health or are glowing.");
 		tooltip.add("§4§lAura: §r§2Regeneration[2] §7and §2Resistance[1] §7while held.");
 	}
-	
+
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onLeftClickEntity(stack, player, entity);
-		if (entity instanceof EntityLivingBase) {
-			EntityLivingBase entityLiving = (EntityLivingBase) entity;
-			if (entityLiving.getHealth() < (entityLiving.getMaxHealth() * 0.2)
-					|| entityLiving.isPotionActive(MobEffects.GLOWING) || entityLiving.isGlowing()) {
-				entityLiving.handleStatusUpdate((byte) 3);
-				HeroicUtil.SendMsgToPlayer("§2" + entityLiving.getName() + " was divinely judged and found unworthy.", player);
-			} else {
-				HeroicUtil.Lifesteal((float) (entityLiving.getHealth() * 0.2), player, entityLiving);
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (target.getHealth() < (target.getMaxHealth() * 0.2) || target.isPotionActive(MobEffects.GLOWING)
+				|| target.isGlowing()) {
+			target.handleStatusUpdate((byte) 3);
+			if (attacker instanceof EntityPlayer) {
+				HeroicUtil.SendMsgToPlayer("§2" + target.getName() + " was divinely judged and found unworthy.",
+						(EntityPlayer) attacker);
 			}
-			player.playSound(SoundEvents.ENTITY_LIGHTNING_IMPACT, 1.6f, 1.0f);
-			HeroicUtil.damageAndCheckItem(stack, 1);
-			return false;
+		} else {
+			HeroicUtil.Lifesteal((float) (target.getHealth() * 0.2), attacker, target);
 		}
-		return false;
+		attacker.playSound(SoundEvents.ENTITY_LIGHTNING_IMPACT, 1.6f, 1.0f);
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
-	
+
 	@Override
-    public void onUpdate(ItemStack itemstack, World world, Entity entity, int itemslot, boolean isSelected) {
+	public void onUpdate(ItemStack itemstack, World world, Entity entity, int itemslot, boolean isSelected) {
 		if (!((EntityLivingBase) entity).isPotionActive(MobEffects.REGENERATION)) {
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 1, false, false));
+			((EntityLivingBase) entity)
+					.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 200, 1, false, false));
 		}
 		if (!((EntityLivingBase) entity).isPotionActive(MobEffects.RESISTANCE)) {
 			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 200, 0, false, false));
 		}
-    }
-	
+	}
+
 	@Override
 	public void registerModels() {
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(Reference.MODID + ":weapons/aclass/bulwarks_hallmark", "inventory"));
+		ModelLoader.setCustomModelResourceLocation(this, 0,
+				new ModelResourceLocation(Reference.MODID + ":weapons/aclass/bulwarks_hallmark", "inventory"));
 	}
 }

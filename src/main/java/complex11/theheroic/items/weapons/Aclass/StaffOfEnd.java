@@ -36,22 +36,21 @@ public class StaffOfEnd extends ItemBase {
 		this.setMaxDamage(3000);
 		setCreativeTab(Main.heroicweaponstabA);
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase attacker) {
-		if (entity instanceof EntityLivingBase) {
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(ModPotions.SOUL_REMOVAL_EFFECT, 100, 1, true, false));
-		}
-        return true;
-    }
-	
+
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7Normal attacks remove targets' souls over time, leaving them extremely weak with 2 health.");
 		tooltip.add("§d§lSpecial Ability: §r§7Shoots a beam that does 80% of target's health + 8 OR 56% of target's heath + 6, depending on how close the beam is to the target. Also shoots 6 explosive pearls that do 6 damage each and apply random negative effects on hit. §fCooldown: 10 seconds.");
 	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.addPotionEffect(new PotionEffect(ModPotions.SOUL_REMOVAL_EFFECT, 100, 1, true, false));
+		HeroicUtil.damageAndCheckItem(stack, 1);
+        return true;
+    }
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {

@@ -36,25 +36,22 @@ public class FlashBlade extends ToolSword {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onLeftClickEntity(stack, player, entity);
-		stack.damageItem(1, player);
-		if (entity instanceof EntityLivingBase) {
-			HeroicUtil.PercentageAttack(0.66f, (EntityLivingBase) entity);
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 5);
-		}
-		player.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);
-		return true;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7Normal attacks deal damage based on target's health.");
 		tooltip.add("§d§lSpecial Ability: §r§7Teleports to all entities in a radius[14] and attacks them for 34% of their current health + 8 magic damage. §fCooldown: 0 seconds.");
 		tooltip.add("§d§lBonus Ability: §r§7Grants §2Speed[11] §7for 10 seconds.");
 		tooltip.add("§4§lAura: §r§2Speed[2] §7while held if §2Speed §7is not already active.");
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		HeroicUtil.PercentageAttack(0.66f, target);
+		target.attackEntityFrom(DamageSource.GENERIC, 5);
+		attacker.playSound(SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, 0.6f, 1.4f);
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 	
 	@Override

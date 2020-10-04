@@ -39,22 +39,21 @@ public class HermesBlade extends ItemBase {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
-		tooltip.add("§d§lPassive: §r§7Normal attacks make targets §cHeartpierced §7and also do 10 bleed damage.");
-		tooltip.add("§d§lSpecial Ability: §r§7All entities in the world that are  §cHeartpierced§7 are struck by lightning. §fCooldown: 3 seconds.");
+		tooltip.add("§9§lClass: §aA");
+		tooltip.add("§d§lPassive: §r§7Normal attacks make targets §3Heartpierced §7and also do 10 bleed damage.");
+		tooltip.add("§d§lSpecial Ability: §r§7All entities in the world that are  §3Heartpierced§7 are struck by lightning. §fCooldown: 3 seconds.");
 		tooltip.add("§d§lBonus Ability: §r§7Teleports a maximum of 40 blocks in the direction faced. §fCooldown: 3.5 seconds.");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			if (!entity.getEntityData().getBoolean(NBT_KEY)) {
-				entity.getEntityData().setBoolean(NBT_KEY, true);
-			}
-			HeroicUtil.BleedAttack(2f, 5, (EntityLivingBase) entity);
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1);
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (!target.getEntityData().getBoolean(NBT_KEY)) {
+			target.getEntityData().setBoolean(NBT_KEY, true);
 		}
-		return false;
+		HeroicUtil.BleedAttack(2f, 5, target);
+		target.attackEntityFrom(DamageSource.GENERIC, 1);
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 
 	@Override

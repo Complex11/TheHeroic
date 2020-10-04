@@ -32,20 +32,18 @@ public class RepeatingBlade extends ToolSword {
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onLeftClickEntity(stack, player, entity);
-		if (entity instanceof EntityLivingBase) {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 12);
-		}
-		return true;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7None.");
 		tooltip.add("§d§lSpecial Ability: §r§7Deals damage to all entities in a radius[5]. For each entity in this radius, damage is multiplied. §fCooldown: 0 seconds.");
+	}
+	
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.attackEntityFrom(DamageSource.CACTUS, 12);
+		return true;
 	}
 	
 	@Override

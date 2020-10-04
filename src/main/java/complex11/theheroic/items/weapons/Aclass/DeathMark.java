@@ -37,19 +37,16 @@ public class DeathMark extends ToolSword {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7Normal attacks mark targets for death.");
 		tooltip.add("§d§lSpecial Ability: §r§7Kill all marked targets in a radius[30]. §fCooldown: 30 seconds.");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onLeftClickEntity(stack, player, entity);
-		if (entity instanceof EntityLivingBase) {
-			((EntityLivingBase) entity).addPotionEffect(new PotionEffect(ModPotions.DEATHMARK_EFFECT));
-			HeroicUtil.damageAndCheckItem(stack, 1);
-		}
-		return false;
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.addPotionEffect(new PotionEffect(ModPotions.DEATHMARK_EFFECT, 20000000, 0, false, false));
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 	
 	@Override

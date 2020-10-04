@@ -3,6 +3,7 @@ package complex11.theheroic.init;
 import complex11.theheroic.potions.Potion4D;
 import complex11.theheroic.potions.PotionBleed;
 import complex11.theheroic.potions.PotionDeathMark;
+import complex11.theheroic.potions.PotionHEAVEN;
 import complex11.theheroic.potions.PotionSoulRemoval;
 import complex11.theheroic.potions.PotionTimeStop;
 import complex11.theheroic.util.Reference;
@@ -19,9 +20,10 @@ public class ModPotions {
 	
 	public static final Potion DEATHMARK_EFFECT = new PotionDeathMark(true, 0);
 	public static final Potion SOUL_REMOVAL_EFFECT = new PotionSoulRemoval(true, 124124124);
-	public static final Potion TIME_STOP_EFFECT = new PotionTimeStop(true, 1234924);
+	public static final Potion TIME_STOP_EFFECT = new PotionTimeStop(false, 1234924);
 	public static final Potion FOUR_DIMENSION_EFFECT = new Potion4D(false, 111333);
 	public static final Potion BLEED_EFFECT = new PotionBleed(true, 16712192);
+	public static final Potion HEAVEN_EFFECT = new PotionHEAVEN(false, 0101011);
 	
 	public static void registerPotion(IForgeRegistry<Potion> registry, String name, Potion potion){
 		potion.setRegistryName(Reference.MODID, name);
@@ -34,8 +36,9 @@ public class ModPotions {
 		IForgeRegistry<Potion> registry = event.getRegistry();
 		registerPotion(registry, "mark_of_death", new PotionDeathMark(true, 0));
 		registerPotion(registry, "soul_removal", new PotionSoulRemoval(true, 124124124));
-		registerPotion(registry, "time_stopped", new PotionTimeStop(true, 1234924));
+		registerPotion(registry, "time_stopped", new PotionTimeStop(false, 1234924));
 		registerPotion(registry, "4_D", new Potion4D(false, 111333));
 		registerPotion(registry, "bleed", new PotionBleed(true, 16712192));
+		registerPotion(registry, "heaven", new PotionHEAVEN(false, 0101011));
 	}
 }

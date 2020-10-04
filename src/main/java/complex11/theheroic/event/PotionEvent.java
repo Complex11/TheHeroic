@@ -20,7 +20,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent.PotionAddedEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -34,7 +36,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 @EventBusSubscriber(modid = Reference.MODID)
 public class PotionEvent {
 
-	//START TIME STOP
+	//TIME STOP
 	
 	@SubscribeEvent
 	public static void onLivingUpdateEventTime(LivingUpdateEvent event) {
@@ -74,25 +76,21 @@ public class PotionEvent {
 			event.player.updateBlocked = false;
 		}
 	}
-
-	//END TIME STOP
 	
-	//START BLEED
+	//BLEED
 	
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public static void onLivingUpdate(LivingUpdateEvent event) {
+	public static void onLivingUpdateBleed(LivingUpdateEvent event) {
 		EntityLivingBase entity = event.getEntityLiving();
 		if (entity.isPotionActive(ModPotions.BLEED_EFFECT)) {
 			if (entity.world.getWorldTime() % 20 == 0) {
-				entity.attackEntityFrom(DamageSource.GENERIC, 1);
+				entity.attackEntityFrom(DamageSource.GENERIC, 1 + entity.getActivePotionEffect(ModPotions.TIME_STOP_EFFECT).getAmplifier());
 				HeroicUtil.spawnParticleAtEntity(entity, EnumParticleTypes.DAMAGE_INDICATOR, 1);
 			}
 		}
 	}
-	
-	//END BLEED
-	
-	//START SOUL REMOVAL
+
+	//SOUL REMOVAL
 	
 	@SubscribeEvent
 	public static void onLivingUpdateSoul(LivingUpdateEvent event) {
@@ -107,10 +105,8 @@ public class PotionEvent {
 			}
 		}
 	}
-	
-	//END SOUL REMOVAL
-	
-	//START 4D
+
+	//4D
 
 	private static Set<String> flyingPlayer = Sets.newHashSet();
 
@@ -156,10 +152,62 @@ public class PotionEvent {
 			Main.proxy.loadShader((EntityPlayer) event.getEntity(), Potion4D.SHADER);
 		}
 	}
+
+	//HEAVEN
 	
-	//END 4D
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onLivingUpdateEventHEAVEN(LivingUpdateEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(ModPotions.HEAVEN_EFFECT)) {
+				player.setHealth(player.getMaxHealth());
+				player.isDead = false;
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onLivingHurtHEAVEN(LivingHurtEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(ModPotions.HEAVEN_EFFECT)) {
+				player.setHealth(player.getMaxHealth());
+				player.isDead = false;
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onLivingAttackHEAVEN(LivingAttackEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(ModPotions.HEAVEN_EFFECT)) {
+				player.setHealth(player.getMaxHealth());
+				player.isDead = false;
+				event.setCanceled(true);
+			}
+		}
+	}
+	
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onLivingDeathHEAVEN(LivingDeathEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			if (player.isPotionActive(ModPotions.HEAVEN_EFFECT)) {
+				player.setHealth(player.getMaxHealth());
+				player.isDead = false;
+				event.setCanceled(true);
+			}
+		}
+	}
 	
 	//OTHER
+	
 	@SubscribeEvent
 	public static void onPlayerTickEvent(PlayerTickEvent event){
 		if(event.player == Minecraft.getMinecraft().player && event.phase == TickEvent.Phase.END){

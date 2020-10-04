@@ -39,32 +39,32 @@ public class FlameWaker extends ToolSword {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §aB");
+		tooltip.add("§9§lClass: §bB");
 		tooltip.add("§d§lPassive: §r§7Normal attacks build §6Hellfire§7. An attack does [6 + §6Hellfire §7count] damage to burning targets, and restores 1 health, but does [4 + §6Hellfire §7count] damage to non-burning targets. Upon reaching 10 §6Hellfire§7, Hellfire is reset in exchange for 1 Blaze Powder.");
 		tooltip.add("§d§lSpecial Ability: §r§7Consume 10 Blaze Powder for 3 minutes of §2Fire Resistance[1]§7. §fCooldown: 0 seconds.");
 		tooltip.add("§4§lAura: §r§7Entities in a radius[3] are set on fire for 3 seconds.");
+		tooltip.add("§6Hellfire: ");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			if (entity.isBurning()) {
-				entity.attackEntityFrom(DamageSource.LAVA, (float) hitCount * 2 + 6);
-				player.setHealth(player.getHealth() + 2);
-			} else {
-				entity.attackEntityFrom(DamageSource.LAVA, (float) hitCount + 4);
-			}
-			if (hitCount < 10) {
-				hitCount += 0.5;
-				if (!Double.toString(hitCount).contains(".5")) {
-					HeroicUtil.SendMsgToPlayer("Hellfire: " + hitCount, player);
-				}
-			} else if (hitCount == 10) {
-				hitCount = 0;
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (target.isBurning()) {
+			target.attackEntityFrom(DamageSource.LAVA, (float) hitCount * 2 + 6);
+			attacker.setHealth(attacker.getHealth() + 2);
+		} else {
+			target.attackEntityFrom(DamageSource.LAVA, (float) hitCount + 4);
+		}
+		if (hitCount < 10) {
+			hitCount += 0.5;
+		} else if (hitCount == 10) {
+			hitCount = 0;
+			if (attacker instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) attacker;
 				HeroicUtil.SendMsgToPlayer("Transforming Souls...", player);
 				player.inventory.addItemStackToInventory(new ItemStack(Items.BLAZE_POWDER));
 			}
 		}
+		HeroicUtil.damageAndCheckItem(stack, 1);
 		return true;
 	}
 	

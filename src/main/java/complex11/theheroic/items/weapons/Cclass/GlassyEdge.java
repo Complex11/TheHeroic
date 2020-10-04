@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import complex11.theheroic.Main;
 import complex11.theheroic.init.ModPotions;
 import complex11.theheroic.items.tool.ToolSword;
+import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -39,19 +40,19 @@ public class GlassyEdge extends ToolSword {
 		tooltip.add("§9§lClass: §eC");
 		tooltip.add("§d§lPassive: §r§7Normal attacks build §6Shatter. §7An attack does [1 + §6Shatter §7count] damage. Upon reaching 12 §6Shatter§7, the next attack will also apply §2Bleed[1] §7and reset §6Shatter.");
 		tooltip.add("§d§lSpecial Ability: §r§7Consumes 10 Glass Blocks and repairs itself for 10 durability. §fCooldown: 0 seconds.");
+		tooltip.add("§6Shatter: ");
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), 1.0f + shatter);
-			shatter++;
-			if (shatter > 12) {
-				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(ModPotions.BLEED_EFFECT, 200, 0, false, false));
-				shatter = 0;
-			}
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.attackEntityFrom(DamageSource.GENERIC, 1.0f + shatter);
+		shatter++;
+		if (shatter > 12) {
+			target.addPotionEffect(new PotionEffect(ModPotions.BLEED_EFFECT, 200, 0, false, false));
+			shatter = 0;
 		}
-		return false;
+		HeroicUtil.damageAndCheckItem(stack, 1);
+		return true;
 	}
 	
 	@Override

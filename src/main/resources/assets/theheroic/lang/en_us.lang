@@ -10,10 +10,14 @@ item.glassy_edge.name=Glassy Edge
 item.blade_of_minor_wounds.name=Blade Of Minor Wounds
 item.special_shock.name=Special Shock
 item.speedster_sword.name=Speedster's Sword
+item.taskmaster.name=Taskmaster
+item.tough_guy.name=Tough Guy
 
 //B-Class
 item.flamewaker.name=Flamewaker
 item.streams_of_pain.name=Streams Of Pain
+item.burster.name=Burster
+item.fruit_ninja.name=Fruit Ninja
 
 //A-Class
 item.flash_blade.name=Flashy Blade
@@ -25,7 +29,8 @@ item.bulwarks_hallmark.name=Bulwark's Hallmark
 item.hellfire_blaze.name=Hellfire Blaze
 
 //S-Class
-item.reality_blade.name=What Is Real?
+item.reality_blade.name=A Question Of Existence
+item.heavenly_smite.name=Heavenly Smite
 
 
 //tabs
@@ -46,3 +51,4 @@ effect.theheroic:4_D=Outer Dimensional
 potion.theheroic:4_D=Outer Dimensional
 effect.theheroic:bleed=Bleeding
 potion.theheroic:bleed=Bleeding
+

@@ -1,10 +1,15 @@
-package complex11.theheroic.items.weapons.Cclass;
+package complex11.theheroic.items.weapons;
+
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 import complex11.theheroic.Main;
 import complex11.theheroic.items.tool.ToolSword;
 import complex11.theheroic.util.HeroicUtil;
 import complex11.theheroic.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +23,7 @@ import net.minecraftforge.client.model.ModelLoader;
 
 public class TemplateWeapon extends ToolSword {
 	
-	private static float damage = 0;
+	public static float damage = 0;
 	
 	public TemplateWeapon(String name, ToolMaterial material) {
 		super(name, material);
@@ -26,12 +31,19 @@ public class TemplateWeapon extends ToolSword {
 	}
 	
 	@Override
-	public boolean onLeftClickEntity(final ItemStack stack, final EntityPlayer player, final Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			entity.attackEntityFrom(DamageSource.GENERIC, damage);
-		}
-		return false;
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+		super.addInformation(stack, world, tooltip, flag);
+		tooltip.add("§9§lClass: §");
+		tooltip.add("§d§lPassive: §r§7");
+		tooltip.add("§d§lSpecial Ability: §r§7");
+		tooltip.add("§4§lAura: §r§7");
 	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		target.attackEntityFrom(DamageSource.GENERIC, damage);
+        return true;
+    }
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {

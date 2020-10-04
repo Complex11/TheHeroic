@@ -1,6 +1,7 @@
 package complex11.theheroic.event;
 
 import complex11.theheroic.init.ModKeybinds;
+import complex11.theheroic.items.weapons.Bclass.FruitNinja;
 import complex11.theheroic.items.weapons.Sclass.RealityBlade;
 import complex11.theheroic.network.RealityBladeAbilityPacket;
 import complex11.theheroic.util.handlers.NetworkHandler;
@@ -20,6 +21,9 @@ public class KeyEvent {
 		if (ModKeybinds.SPECIAL_1.isPressed()) {
 			if (player.getHeldItemMainhand().getItem() instanceof RealityBlade) {
 				NetworkHandler.INSTANCE.sendMessageToServer(new RealityBladeAbilityPacket());
+			}
+			if (player.getHeldItemMainhand().getItem() instanceof FruitNinja) {
+				//NetworkHandler.INSTANCE.sendMessageToServer(new FruitNinjaAbilityPacket());
 			}
 		}
 	}

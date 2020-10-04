@@ -20,15 +20,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModEntities {
 	
 	public static void registerEntities() {
-		int projectileBase = 10;
-		registerProjectile("special_fireball", projectileBase++, SpecialFireball.class);
-		registerProjectile("special_pearl", projectileBase++, SpecialPearl.class);
+		int index = 0;
+		registerProjectile("special_fireball", index++, SpecialFireball.class);
+		registerProjectile("special_pearl", index++, SpecialPearl.class);
 		registerRenders();
 	}
 	
 	@SuppressWarnings("unused")
-	private static void registerMob(String name, Class<? extends Entity> entity, int id, int range, int color1, int color2) {
+	private static void registerMob(String name, int id, Class<? extends Entity> entity, int range, int color1, int color2) {
 		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MODID + ":" + name), entity, name, id, Main.instance, range, 3, true, color1, color2);
+	}
+	
+	@SuppressWarnings("unused")
+	private static void registerEntity(String name, int id, Class<? extends Entity> entity, int range) {
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MODID + ":" + name), entity, name, id, Main.instance, range, 3, true);
 	}
 	
 	private static void registerProjectile(String name, int id, Class<? extends Entity> entity) {
@@ -39,8 +44,6 @@ public class ModEntities {
 	@SideOnly(Side.CLIENT)
 	private static void registerRenders() {
 		RenderingRegistry.registerEntityRenderingHandler(SpecialFireball.class, renderManager -> new RenderSpecialFireball(renderManager)); 
-		RenderingRegistry.registerEntityRenderingHandler(SpecialPearl.class, renderManager -> new RenderSnowball(renderManager, Items.ENDER_PEARL, Minecraft.getMinecraft().getRenderItem()));
-		
+		RenderingRegistry.registerEntityRenderingHandler(SpecialPearl.class, renderManager -> new RenderSnowball(renderManager, Items.ENDER_PEARL, Minecraft.getMinecraft().getRenderItem()));	
 	}
-
 }

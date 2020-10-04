@@ -44,7 +44,7 @@ public class HellfireBlaze extends ItemBase {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
 		super.addInformation(stack, world, tooltip, flag);
-		tooltip.add("§9§lClass: §bA");
+		tooltip.add("§9§lClass: §aA");
 		tooltip.add("§d§lPassive: §r§7None");
 		tooltip.add("§d§lSpecial Ability: §r§7Perform one of §cHell's Attacks. §fCooldown: 5 seconds.");
 		tooltip.add("§c§lHell's Attacks:");
