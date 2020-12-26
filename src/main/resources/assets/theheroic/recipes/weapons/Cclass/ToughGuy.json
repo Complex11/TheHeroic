@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  T",
+    "IT ",
+    "SI "
+  ],
+
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "T":
+    {
+      "item": "theheroic:triple_compressed_iron_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:tough_guy",
+    "count": 1
+  }
+}

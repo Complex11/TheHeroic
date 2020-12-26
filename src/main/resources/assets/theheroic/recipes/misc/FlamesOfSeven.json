@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " B ",
+    "BWB",
+    " B "
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:flames_of_seven",
+    "count": 1
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "DCD",
+    "CIC",
+    "DCD"
+  ],
+
+  "key":
+  {
+    "D":
+    {
+      "item": "minecraft:dirt",
+      "data": 0
+    },
+    "C":
+    {
+      "item": "minecraft:cobblestone"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:earth_ingot",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  D",
+    "FL ",
+    "RF "
+  ],
+
+  "key":
+  {
+    "F":
+    {
+      "item": "theheroic:flames_of_seven"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    },
+    "L":
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    "R":
+    {
+      "item": "minecraft:blaze_rod"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:flamewaker",
+    "count": 1
+  }
+}

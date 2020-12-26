@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  P",
+    "BP ",
+    "AB "
+  ],
+
+  "key":
+  {
+    "P":
+    {
+      "item": "theheroic:painwater"
+    },
+    "B":
+    {
+      "item": "theheroic:liquid_body"
+    },
+    "A":
+    {
+      "item": "theheroic:aquastick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:streams_of_pain",
+    "count": 1
+  }
+}

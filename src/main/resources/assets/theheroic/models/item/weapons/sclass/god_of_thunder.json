@@ -1,0 +1,6 @@
+{
+   "parent": "item/handheld",
+   "textures": {
+       "layer0": "theheroic:items/weapons/sclass/god_of_thunder"
+   }
+}

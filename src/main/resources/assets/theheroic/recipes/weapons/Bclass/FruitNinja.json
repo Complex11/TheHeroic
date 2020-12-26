@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  E",
+    "AE ",
+    "SA "
+  ],
+
+  "key":
+  {
+    "E":
+    {
+      "item": "theheroic:essence"
+    },
+    "A":
+    {
+      "item": "minecraft:apple"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:fruit_ninja",
+    "count": 1
+  }
+}

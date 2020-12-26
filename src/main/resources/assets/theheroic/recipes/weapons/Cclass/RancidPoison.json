@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  E",
+    "NE ",
+    "SN "
+  ],
+
+  "key":
+  {
+    "E":
+    {
+      "item": "theheroic:earth_ingot"
+    },
+    "N":
+    {
+      "item": "theheroic:nastyball"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:rancid_poison",
+    "count": 1
+  }
+}

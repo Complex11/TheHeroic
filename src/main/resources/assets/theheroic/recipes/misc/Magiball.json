@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "FDE",
+    "DND",
+    "EDF"
+  ],
+
+  "key":
+  {
+    "D":
+    {
+      "item": "minecraft:diamond"
+    },
+    "E":
+    {
+      "item": "minecraft:emerald"
+    },
+    "F":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "N":
+    {
+      "item": "minecraft:nether_star"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:magiball",
+    "count": 4
+  }
+}

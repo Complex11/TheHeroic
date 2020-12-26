@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  W",
+    " F ",
+    "S  "
+  ],
+
+  "key":
+  {
+    "W":
+    {
+      "item": "theheroic:living_wind"
+    },
+    "F":
+    {
+      "item": "minecraft:feather"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:speedster_sword",
+    "count": 1
+  }
+}

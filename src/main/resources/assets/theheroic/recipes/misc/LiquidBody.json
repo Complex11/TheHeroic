@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "IWI",
+    "WEW",
+    "IWI"
+  ],
+
+  "key":
+  {
+    "W":
+    {
+      "item": "minecraft:water_bucket"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_chestplate"
+    },
+    "E":
+    {
+      "item": "theheroic:essence"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:liquid_body",
+    "count": 1
+  }
+}

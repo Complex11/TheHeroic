@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "WRW",
+    "DED",
+    "WRW"
+  ],
+
+  "key":
+  {
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    },
+    "R":
+    {
+      "item": "minecraft:redstone"
+    },
+    "E":
+    {
+      "item": "theheroic:essence"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:weather_talisman",
+    "count": 1
+  }
+}

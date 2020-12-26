@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "FWF",
+    "WIW",
+    "FWF"
+  ],
+
+  "key":
+  {
+    "I":
+    {
+      "item": "theheroic:infernus_star"
+    },
+    "F":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:strong_charge",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "TWT",
+    "ISI",
+    "TWT"
+  ],
+
+  "key":
+  {
+    "T":
+    {
+      "item": "theheroic:triple_compressed_iron_ingot"
+    },
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:reinforced_rod",
+    "count": 9
+  }
+}

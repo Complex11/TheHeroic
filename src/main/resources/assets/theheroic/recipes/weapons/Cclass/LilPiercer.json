@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  L",
+    "FD ",
+    "SF "
+  ],
+
+  "key":
+  {
+    "F":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "L":
+    {
+      "item": "theheroic:living_wind"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:lil_piercer",
+    "count": 1
+  }
+}

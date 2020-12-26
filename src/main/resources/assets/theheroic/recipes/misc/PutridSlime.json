@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "SBS",
+    "BEB",
+    "SBS"
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "minecraft:slimeball"
+    },
+    "S":
+    {
+      "item": "minecraft:string"
+    },
+    "E":
+    {
+      "item": "minecraft:spider_eye"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:putrid_slime",
+    "count": 1
+  }
+}

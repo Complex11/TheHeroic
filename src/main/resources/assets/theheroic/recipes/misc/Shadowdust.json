@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "GDG",
+    "DBD",
+    "GDG"
+  ],
+
+  "key":
+  {
+    "G":
+    {
+      "item": "minecraft:gunpowder"
+    },
+    "D":
+    {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    "B":
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:shadowdust",
+    "count": 4
+  }
+}

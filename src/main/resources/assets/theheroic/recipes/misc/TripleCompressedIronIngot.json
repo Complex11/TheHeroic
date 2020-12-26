@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "BBB",
+    "III",
+    "BBB"
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:triple_compressed_iron_ingot",
+    "count": 3
+  }
+}

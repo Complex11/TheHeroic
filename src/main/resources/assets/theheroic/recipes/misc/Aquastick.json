@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  S",
+    " W ",
+    "S  "
+  ],
+
+  "key":
+  {
+    "S":
+    {
+      "item": "minecraft:stick"
+    },
+    "W":
+    {
+      "item": "minecraft:water_bucket"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:aquastick",
+    "count": 1
+  }
+}

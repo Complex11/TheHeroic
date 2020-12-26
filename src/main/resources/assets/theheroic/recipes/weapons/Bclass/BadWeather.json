@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  F",
+    "TW ",
+    "RT "
+  ],
+
+  "key":
+  {
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    },
+    "F":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "T":
+    {
+      "item": "theheroic:weather_talisman"
+    },
+    "R":
+    {
+      "item": "theheroic:reinforced_rod"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:bad_weather",
+    "count": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " G ",
+    " P ",
+    " G "
+  ],
+
+  "key":
+  {
+    "P":
+    {
+      "item": "minecraft:glass_pane"
+    },
+    "G":
+    {
+      "item": "minecraft:glass"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:glass_rod",
+    "count": 1
+  }
+}

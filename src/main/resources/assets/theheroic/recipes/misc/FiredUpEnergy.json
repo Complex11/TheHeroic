@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "RBR",
+    "BDB",
+    "RBR"
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "theheroic:essence"
+    },
+    "R":
+    {
+      "item": "minecraft:redstone"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:fired_up_energy",
+    "count": 4
+  }
+}

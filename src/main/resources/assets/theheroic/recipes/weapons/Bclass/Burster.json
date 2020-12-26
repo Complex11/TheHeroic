@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  O",
+    "FO ",
+    "RF "
+  ],
+
+  "key":
+  {
+    "F":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "O":
+    {
+      "item": "minecraft:obsidian"
+    },
+    "R":
+    {
+      "item": "theheroic:ragetable"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:burster",
+    "count": 1
+  }
+}

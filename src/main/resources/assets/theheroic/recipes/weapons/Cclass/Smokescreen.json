@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  I",
+    "DL ",
+    "SD "
+  ],
+
+  "key":
+  {
+    "D":
+    {
+      "item": "theheroic:shadowdust"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "L":
+    {
+      "item": "theheroic:living_wind"
+    },
+    "S":
+    {
+      "item": "minecraft:stick"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:smokescreen",
+    "count": 1
+  }
+}

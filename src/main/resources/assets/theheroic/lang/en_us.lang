@@ -1,6 +1,29 @@
 //items
-item.essence.name=Base Essence
+item.essence.name=World Essence
 item.reality_fragment.name=Reality Fragment
+item.shard_of_creation.name=Shard Of Creation
+item.earth_ingot.name=Earth Ingot
+item.living_wind.name=Living Wind
+item.flames_of_seven.name=Flames Of Seven
+item.liquid_body.name=Liquid Body
+item.magiball.name=Magiball
+item.superstrong_iron_ingot.name=Superstrong Iron Ingot
+item.weak_charge.name=Weak Charge
+item.glass_rod.name=Glass Rod
+item.fired_up_energy.name=Fired Up Energy
+item.shadowdust.name=Shadowdust
+item.putrid_slime.name=Putrid Slime
+item.infernus_star.name=Infernus Star
+item.triple_compressed_iron_ingot.name=Triple Compressed Iron Ingot
+item.painwater.name=Painwater
+item.aquastick.name=Aquastick
+item.reinforced_rod.name=Reinforced Rod
+item.strong_charge.name=Strong Charge
+item.weather_talisman.name=Weather Talisman
+
+//consumables
+item.gummy_heart.name=Gummy Heart
+item.ragetable.name=Ragetable
 
 //weapons
 
@@ -12,25 +35,36 @@ item.special_shock.name=Special Shock
 item.speedster_sword.name=Speedster's Sword
 item.taskmaster.name=Taskmaster
 item.tough_guy.name=Tough Guy
+item.lil_piercer.name=Lil' Piercer
+item.smokescreen.name=Smokescreen
+item.rancid_poison.name=Rancid Poison
 
 //B-Class
 item.flamewaker.name=Flamewaker
 item.streams_of_pain.name=Streams Of Pain
 item.burster.name=Burster
 item.fruit_ninja.name=Fruit Ninja
+item.bad_weather.name=Bad Weather
+item.last_stand.name=Last Stand
 
 //A-Class
-item.flash_blade.name=Flashy Blade
-item.repeating_blade.name=Unnatural Barrage
+item.flashy_slash.name=Flashy Slash
+item.repeating_blade.name=Repeating Blade
 item.death_mark.name=Death's Mark
 item.staff_of_end.name=Staff Of The End
-item.hermes_blade.name=Sword of Hermes
+item.hermes_dagger.name=Hermes' Dagger
 item.bulwarks_hallmark.name=Bulwark's Hallmark
 item.hellfire_blaze.name=Hellfire Blaze
+item.prime_target.name=Prime Target
+item.earthscorn.name=Earthscorn
+item.quick_draw.name=Quick Draw
 
 //S-Class
-item.reality_blade.name=A Question Of Existence
+item.schrodingers_gift.name=Schrodinger's Gift
 item.heavenly_smite.name=Heavenly Smite
+item.the_enabler.name=The Enabler
+item.god_of_thunder.name=God Of Thunder
+item.judgement.name=Judgement
 
 
 //tabs
@@ -39,6 +73,7 @@ itemGroup.heroicweaponstabcclass=The Heroic C-Class Weapons
 itemGroup.heroicweaponstabbclass=The Heroic B-Class Weapons
 itemGroup.heroicweaponstabaclass=The Heroic A-Class Weapons
 itemGroup.heroicweaponstabsclass=The Heroic S-Class Weapons
+itemGroup.heroicfoodtab=The Heroic Food
 
 //potioneffects
 effect.theheroic:mark_of_death=Mark of Death
@@ -51,4 +86,14 @@ effect.theheroic:4_D=Outer Dimensional
 potion.theheroic:4_D=Outer Dimensional
 effect.theheroic:bleed=Bleeding
 potion.theheroic:bleed=Bleeding
+effect.theheroic:heaven=MADE IN HEAVEN
+potion.theheroic:heaven=MADE IN HEAVEN
+effect.theheroic:smokescreen=Smokescreen
+potion.theheroic:smokescreen=Smokescreen
+effect.theheroic:flight=Flight
+potion.theheroic:flight=Flight
+effect.theheroic:thunder=Target Of Thunder
+potion.theheroic:thunder=Target Of Thunder
 
+//entities
+entity.magiball.name=Magiball

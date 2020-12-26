@@ -1,0 +1,57 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "LIG",
+    "CRQ",
+    "PBS"
+  ],
+
+  "key":
+  {
+    "L":
+    {
+      "item": "minecraft:dye",
+      "data": 4
+    },
+    "I":
+    {
+      "item": "minecraft:dye",
+      "data": 0
+    },
+    "G":
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    "C":
+    {
+      "item": "minecraft:clay_ball"
+    },
+    "R":
+    {
+      "item": "minecraft:redstone"
+    },
+    "Q":
+    {
+      "item": "minecraft:quartz"
+    },
+    "P":
+    {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "B":
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:essence",
+    "count": 9
+  }
+}

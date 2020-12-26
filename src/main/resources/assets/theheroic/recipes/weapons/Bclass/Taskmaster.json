@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "TST",
+    " R ",
+    " R "
+  ],
+
+  "key":
+  {
+    "T":
+    {
+      "item": "theheroic:triple_compressed_iron_ingot"
+    },
+    "S":
+    {
+      "item": "theheroic:superstrong_iron_ingot"
+    },
+    "R":
+    {
+      "item": "theheroic:reinforced_rod"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:taskmaster",
+    "count": 1
+  }
+}

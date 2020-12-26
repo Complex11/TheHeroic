@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "BWB",
+    "BEB",
+    "BWB"
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "minecraft:water_bucket"
+    },
+    "E":
+    {
+      "item": "theheroic:essence"
+    },
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:painwater",
+    "count": 1
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "  W",
+    " W ",
+    "I  "
+  ],
+
+  "key":
+  {
+    "W":
+    {
+      "item": "theheroic:weak_charge"
+    },
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:special_shock",
+    "count": 1
+  }
+}

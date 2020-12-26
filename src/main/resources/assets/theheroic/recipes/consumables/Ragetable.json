@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " P ",
+    "PCP",
+    " E "
+  ],
+
+  "key":
+  {
+    "P":
+    {
+      "item": "theheroic:putrid_slime"
+    },
+    "C":
+    {
+      "item": "minecraft:carrot"
+    },
+    "E":
+    {
+      "item": "theheroic:essence"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:ragetable",
+    "count": 3
+  }
+}

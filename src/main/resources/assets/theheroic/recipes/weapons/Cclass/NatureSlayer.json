@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    " SA",
+    " LS",
+    "S  "
+  ],
+
+  "key":
+  {
+    "S":
+    {
+      "item": "minecraft:stick"
+    },
+    "L":
+    {
+      "item": "minecraft:log"
+    },
+    "A":
+    {
+      "item": "minecraft:apple"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:nature_slayer",
+    "count": 1
+  }
+}

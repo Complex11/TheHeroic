@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "FEF",
+    "BSB",
+    "FEF"
+  ],
+
+  "key":
+  {
+    "B":
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    "E":
+    {
+      "item": "theheroic:fired_up_energy"
+    },
+    "F":
+    {
+      "item": "theheroic:flames_of_seven"
+    },
+    "S":
+    {
+      "item": "minecraft:nether_star"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:infernus_star",
+    "count": 1
+  }
+}

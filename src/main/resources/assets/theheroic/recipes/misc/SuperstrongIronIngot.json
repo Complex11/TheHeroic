@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+
+  "pattern":
+  [
+    "III",
+    "IDI",
+    "III"
+  ],
+
+  "key":
+  {
+    "I":
+    {
+      "item": "theheroic:triple_compressed_iron_ingot"
+    },
+    "D":
+    {
+      "item": "minecraft:diamond"
+    }
+  },
+
+  "result":
+  {
+    "item": "theheroic:superstrong_iron_ingot",
+    "count": 1
+  }
+}
